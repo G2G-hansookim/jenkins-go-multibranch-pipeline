@@ -19,11 +19,14 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'go build'
+                echo "Success Build!"
             }
         }
 
         stage('Result') {
-            echo "Echo Result Stage"
+            steps {
+                echo "Result!"
+            }
         }
     }
 }
