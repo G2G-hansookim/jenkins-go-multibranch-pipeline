@@ -9,7 +9,11 @@ pipeline {
         GO111MODULE = 'on'
     }
 
-    stage('PreBuild') {
-        sh 'go version'
+    stages {
+        stage('PreBuild') {
+            steps {
+                sh 'go version'
+            }
+        }
     }
 }
