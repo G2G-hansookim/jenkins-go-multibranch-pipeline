@@ -1,5 +1,5 @@
 pipeline {
-   agent master
+   agent any
 
     tools {
         go 'go-1.17.3'
