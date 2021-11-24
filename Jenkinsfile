@@ -12,20 +12,20 @@ pipeline {
     stages {
         stage('PreBuild') {
             steps {
-                sh 'go version'
+                bat 'go version'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'go build'
+                bat 'go build'
                 echo "Success Build!"
             }
         }
 
         stage('Result') {
             steps {
-                echo "Result!"
+                bat "Result!"
             }
         }
     }
