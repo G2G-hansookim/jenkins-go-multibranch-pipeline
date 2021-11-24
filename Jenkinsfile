@@ -6,8 +6,8 @@ pipeline {
     }
 
     environment {
-//         GO111MODULE = 'on'
-        GOPATH = "D:/jenkins-go-multibranch-pipeline"
+        GO111MODULE = 'on'
+//         GOPATH = "D:/jenkins-go-multibranch-pipeline"
     }
 
     stages {
@@ -19,7 +19,8 @@ pipeline {
 
         stage('Build') {
             steps {
-                 bat """cd $GOPATH/src/ && go build"""
+//                  bat """cd $GOPATH/src/ && go build"""
+                bat 'go build'
             }
         }
 
