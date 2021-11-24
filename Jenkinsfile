@@ -7,6 +7,7 @@ pipeline {
 
     environment {
         GO111MODULE = 'on'
+        GOPATH = '${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}'
     }
 
     stages {
