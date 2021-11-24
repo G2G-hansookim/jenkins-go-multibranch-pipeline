@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         GO111MODULE = 'on'
-        GOPATH = '${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}'
+        GOPATH = 'D:\jenkins-go-multibranch-pipeline'
     }
 
     stages {
@@ -19,7 +19,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                 bat """cd $GOPATH/ && go build -ldflags '-s'"""
+                 bat """cd $GOPATH && go build -ldflags '-s'"""
             }
         }
 
