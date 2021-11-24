@@ -18,7 +18,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'go build'
+                 bat """cd $GOPATH/ && go build -ldflags '-s'"""
             }
         }
 
