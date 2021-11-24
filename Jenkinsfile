@@ -18,8 +18,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat "cd $GOPATH && go build"
-                echo "Success Build!"
+                bat 'go build'
             }
         }
 
