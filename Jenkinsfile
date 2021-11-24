@@ -15,5 +15,15 @@ pipeline {
                 sh 'go version'
             }
         }
+
+        stage('Build') {
+            steps {
+                sh 'go build'
+            }
+        }
+
+        stage('Result') {
+            echo "Echo Result Stage"
+        }
     }
 }
