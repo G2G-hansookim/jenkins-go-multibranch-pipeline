@@ -38,7 +38,7 @@ pipeline {
         stage('Results') {
             steps {
                 echo "results"
-                archiveArtifacts 'target/*.jar'
+                archiveArtifacts artifacts: "target/*.exe", fingerprint: true, onlyIfSuccessful: true
             }
         }
 
