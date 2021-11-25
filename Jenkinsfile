@@ -65,15 +65,15 @@ pipeline {
                    echo "publish"
 
 //                    Find out current branch
-                   bat 'git name-rev --name-only HEAD > GIT_BRANCH'
-                   def branch = readFile('GIT_BRANCH').trim()
-
-                    //strip off repo-name/origin/ (optional)
-                    branch = branch.substring(branch.lastIndexOf('/') + 1)
-
-                    def archive = "${GOPATH}/project-${branch}-${commit}.tar.gz"
-
-                    echo "building archive ${archive}"
+//                    bat 'git name-rev --name-only HEAD > GIT_BRANCH'
+//                    def branch = readFile('GIT_BRANCH').trim()
+//
+//                     //strip off repo-name/origin/ (optional)
+//                     branch = branch.substring(branch.lastIndexOf('/') + 1)
+//
+//                     def archive = "${GOPATH}/project-${branch}-${commit}.tar.gz"
+//
+//                     echo "building archive ${archive}"
 
 //                     bat """tar -cvzf ${archive} $GOPATH/src/cmd/project/project"""
 //
