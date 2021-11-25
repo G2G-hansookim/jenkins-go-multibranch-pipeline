@@ -22,9 +22,12 @@ pipeline {
         stage('Build & Unit Test') {
             steps {
                 echo "start build"
-
-                // Build
-                bat 'go build'
+                timeout(time: 3, unit: 'MINUTES') {
+                    retry(5) {
+                        // Build
+                        bat 'go build'
+                    }
+                }
 
                 echo "start unit test"
 
@@ -33,6 +36,9 @@ pipeline {
 
                 // Run Unit Tests.
                 bat 'go test ./... -coverprofile=report.txt'
+
+                // Failed
+                bat 'go test ./... | -coverprofile=report.txt'
             }
         }
 
@@ -64,6 +70,35 @@ pipeline {
               steps {
                    echo "publish"
               }
+        }
+    }
+
+    // When the Pipeline has finished executing, you may need to run clean-up steps or perform some actions based on the outcome of the Pipeline. These actions can be performed in the post section.
+    post {
+        always {
+            echo 'This will always run'
+        }
+        success {
+            echo 'This will run only if successful'
+        }
+        failure {
+            echo 'This will run only if failed'
+
+            // Email
+            mail to: 'hsupc@game2gather.com',
+                         subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                         body: "Something is wrong with ${env.BUILD_URL}"
+
+            // HitChat
+            hipchatSend message: "Attention @here ${env.JOB_NAME} #${env.BUILD_NUMBER} has failed.",
+                                color: 'RED'
+        }
+        unstable {
+            echo 'This will run only if the run was marked as unstable'
+        }
+        changed {
+            echo 'This will run only if the state of the Pipeline has changed'
+            echo 'For example, if the Pipeline was previously failing but is now successful'
         }
     }
 }
