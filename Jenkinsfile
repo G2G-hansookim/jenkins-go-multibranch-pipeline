@@ -7,7 +7,6 @@ pipeline {
 
     environment {
         GO111MODULE = 'auto'
-//         GOPATH = "D:/jenkins-go-multibranch-pipeline"
     }
 
     stages {
@@ -19,15 +18,22 @@ pipeline {
 
         stage('Build') {
             steps {
-//                  bat """cd $GOPATH/src/ && go build"""
                 bat 'go build'
             }
         }
 
-        stage('Result') {
-            steps {
-                echo "Result!"
+        stage ('Release') {
+              when {
+                buildingTag()
+              }
+
+              environment {
+                GITHUB_TOKEN = credentials('github_credentials')
+              }
+
+              steps {
+                bat 'curl -sL https://github.com/G2G-hansookim/jenkins-go-multibranch-pipeline.git | bash'
+              }
             }
-        }
     }
 }
