@@ -22,6 +22,16 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                // Remove cached test results.
+               bat 'go clean -cache'
+
+               // Run Unit Tests.
+               bat 'go test ./... -v -short'
+            }
+        }
+
         stage ('Deploy') {
 //               when {
 //                 buildingTag()
