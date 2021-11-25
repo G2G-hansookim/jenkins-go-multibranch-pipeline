@@ -31,7 +31,7 @@ pipeline {
                 bat 'go clean -cache'
 
                 // Run Unit Tests.
-                bat 'go test ./... -v -short | -coverprofile=report.txt'
+                bat 'go test ./... -coverprofile=report.txt'
             }
         }
 
