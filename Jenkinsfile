@@ -3,6 +3,7 @@ pipeline {
 
     tools {
         go 'go-1.17.3'
+        go get github.com/tebeka/go2xunit
     }
 
     environment {
@@ -31,7 +32,7 @@ pipeline {
                 bat 'go clean -cache'
 
                 // Run Unit Tests.
-                bat 'go test ./... -v -short | go-junit-report -set-exit-code > report.xml'
+                bat 'go test ./... -v -short | go2xunit > report.xml'
             }
         }
 
