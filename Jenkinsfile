@@ -15,9 +15,7 @@ pipeline {
             steps {
                 echo "prebuild"
                 bat 'go version'
-                bat 'go get -u golang.org/x/lint/golint'
-                bat 'go get github.com/axw/gocov/gocov'
-                bat 'go get github.com/AlekSi/gocov-xml'
+//                 bat 'go get -u golang.org/x/lint/golint'
             }
         }
 
@@ -38,7 +36,6 @@ pipeline {
 
                 // Run Unit Tests.
                 bat 'go test ./... -coverprofile=report.txt'
-                bat 'gocov test ./... | gocov-xml > coverage.xml'
             }
         }
 
@@ -48,7 +45,6 @@ pipeline {
 
                 // go test results
                 archiveArtifacts artifacts: "*.txt", fingerprint: true
-                archiveArtifacts artifacts: "*.xml", fingerprint: true
 
                 // go build results
                 archiveArtifacts artifacts: "*.exe", fingerprint: true, onlyIfSuccessful: true
