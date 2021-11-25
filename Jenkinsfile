@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         go 'go-1.17.3'
-        go get github.com/tebeka/go2xunit
+        go get 'github.com/tebeka/go2xunit'
     }
 
     environment {
