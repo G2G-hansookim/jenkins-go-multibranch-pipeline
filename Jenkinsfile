@@ -15,6 +15,7 @@ pipeline {
             steps {
                 echo "prebuild"
                 bat 'go version'
+                bat 'go get -u golang.org/x/lint/golint'
             }
         }
 
