@@ -32,7 +32,7 @@ pipeline {
               }
 
               steps {
-                bat 'curl -sL https://github.com/G2G-hansookim/jenkins-go-multibranch-pipeline.git | bash'
+                bat 'curl -sL https://git.io/goreleaser | bash'
               }
             }
     }
