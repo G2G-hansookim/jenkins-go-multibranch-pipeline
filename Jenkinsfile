@@ -31,7 +31,7 @@ pipeline {
                 bat 'go clean -cache'
 
                 // Run Unit Tests.
-                bat 'go test ./... -v -short | go2xunit > report.xml'
+                bat 'go test ./... -v -short | -coverprofile=report.txt'
             }
         }
 
@@ -40,7 +40,7 @@ pipeline {
                 echo "results"
 
                 // go test results
-                archiveArtifacts artifacts: "report.xml", fingerprint: true
+                archiveArtifacts artifacts: "report.txt", fingerprint: true
 
                 // go build results
                 archiveArtifacts artifacts: "*.exe", fingerprint: true, onlyIfSuccessful: true
