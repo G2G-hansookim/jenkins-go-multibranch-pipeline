@@ -36,9 +36,6 @@ pipeline {
 
                 // Run Unit Tests.
                 bat 'go test ./... -coverprofile=report.txt'
-
-                // Failed
-                bat 'go test ./... | -coverprofile=report.txt'
             }
         }
 
@@ -83,15 +80,6 @@ pipeline {
         }
         failure {
             echo 'This will run only if failed'
-
-            // Email
-            mail to: 'hsupc@game2gather.com',
-                         subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-                         body: "Something is wrong with ${env.BUILD_URL}"
-
-            // HitChat
-            hipchatSend message: "Attention @here ${env.JOB_NAME} #${env.BUILD_NUMBER} has failed.",
-                                color: 'RED'
         }
         unstable {
             echo 'This will run only if the run was marked as unstable'
