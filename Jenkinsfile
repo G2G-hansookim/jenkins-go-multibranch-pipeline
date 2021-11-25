@@ -31,13 +31,18 @@ pipeline {
                 bat 'go clean -cache'
 
                 // Run Unit Tests.
-                bat 'go test ./... -v -short'
+                bat 'go test ./... -v -short | go-junit-report -set-exit-code > report.xml'
             }
         }
 
         stage('Results') {
             steps {
                 echo "results"
+
+                // go test results
+                archiveArtifacts artifacts: "report.xml", fingerprint: true
+
+                // go build results
                 archiveArtifacts artifacts: "*.exe", fingerprint: true, onlyIfSuccessful: true
             }
         }
@@ -55,34 +60,9 @@ pipeline {
         }
 
         stage ('Publish') {
-//               when {
-//                 buildingTag()
-//               }
-
               steps {
-//                 bat 'curl -sL https://git.io/goreleaser | bash'
-
                    echo "publish"
-
-//                    Find out current branch
-//                    bat 'git name-rev --name-only HEAD > GIT_BRANCH'
-//                    def branch = readFile('GIT_BRANCH').trim()
-//
-//                     //strip off repo-name/origin/ (optional)
-//                     branch = branch.substring(branch.lastIndexOf('/') + 1)
-//
-//                     def archive = "${GOPATH}/project-${branch}-${commit}.tar.gz"
-//
-//                     echo "building archive ${archive}"
-
-//                     bat """tar -cvzf ${archive} $GOPATH/src/cmd/project/project"""
-//
-//                     echo "uploading ${archive}"
-//                     withCredentials([string(credentialsId: 'bb-upload-key', variable: 'KEY')]) {
-//                     bat """curl -s -u 'user:${KEY}' -X POST 'downloads-page-url' --form files=@'${archive}' --fail"""
-
-
               }
-            }
+        }
     }
 }
